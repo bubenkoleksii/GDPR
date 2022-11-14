@@ -3,7 +3,7 @@ import axios from "axios";
 
 import './App.css';
 import {STORE_URL} from './consts';
-import CardItem from "./components/CardItem";
+import CardRow from "./components/CardRow";
 
 
 function App() {
@@ -15,23 +15,34 @@ function App() {
         });
     }
 
+    const makeMatrixForProduct = (products, columns) => {
+        const mainArray = [];
+
+        for (let i = 0; i < products.length / columns; i++) {
+            const rowArray = [];
+            for (let j = i * columns; j < i * columns + columns; j++) {
+                rowArray.push(products[j]);
+            }
+            mainArray.push(rowArray);
+        }
+
+        return mainArray;
+    }
+
     useEffect(() => {
         const url = STORE_URL + 'products';
 
         setFakeData(url);
     }, []);
-    console.log(products);
+
+    console.log(makeMatrixForProduct(products));
 
     return (
         <div className="App">
-            {products[0] && <CardItem category={products[0].category}
-                                      description={products[0].description}
-                                      id={products[0].id}
-                                      image={products[0].image}
-                                      price={products[0].price}
-                                      rating={products[0].rating}
-                                      title={products[0].title}/>
-            }
+            { products && makeMatrixForProduct(products, 5).map((item) =>
+                <CardRow products={item}/>
+            )}
+
         </div>
     );
 }
