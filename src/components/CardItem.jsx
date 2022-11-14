@@ -1,10 +1,11 @@
 import React from 'react';
 import {Button, Card} from "react-bootstrap";
+import StarRatings from 'react-star-ratings';
 
 const CardItem = ({ category, description, id, image, price, rating, title }) => {
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={image} />
+            <Card.Img variant="top" src={image}/>
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
@@ -12,6 +13,16 @@ const CardItem = ({ category, description, id, image, price, rating, title }) =>
                 </Card.Text>
                 <Card.Text>
                     {description}
+                </Card.Text>
+                <Card.Text>
+                    <StarRatings
+                        rating={rating.rate}
+                        starRatedColor="#f5c542"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension="24px"
+                        starSpacing="2px"
+                    /> {rating.count} відгуків
                 </Card.Text>
                 <Card.Text>
                     {price}$
