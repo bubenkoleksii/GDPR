@@ -4,9 +4,12 @@ import StarRatings from 'react-star-ratings';
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {ImCart} from "react-icons/im";
 
-const CardItem = ({category, description, id, image, price, rating, title}) => {
-    const [isLiked, setIsLiked] = useState(false);
+const CardItem = ({category, description, id, image, price, rating, title, removeFavorite, addFavorite, checkIsFavorite}) => {
+    const [isLiked, setIsLiked] = useState( checkIsFavorite(id) );
+    
     const likeHandler = () => {
+        isLiked ? removeFavorite(id) : addFavorite({category, description, id, image, price, rating, title});
+        
         setIsLiked(!isLiked);
     }
 
