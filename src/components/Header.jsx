@@ -21,7 +21,8 @@ const Header = ({sortByRate, sortByPrice, clearFilters}) => {
             </Dropdown.Toggle>
           
             <Dropdown.Menu>
-              <Dropdown.Item onClick={sortByPrice}>За ціною</Dropdown.Item>
+              <Dropdown.Item onClick={() => sortByPrice(false)}>За зростанням ціни</Dropdown.Item>
+              <Dropdown.Item onClick={() => sortByPrice(true)}>За спаданням ціни</Dropdown.Item>
               <Dropdown.Item onClick={sortByRate}>За рейтингом</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
