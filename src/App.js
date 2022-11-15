@@ -19,8 +19,8 @@ function App() {
         });
     }
 
-    const sortByPrice = () => {
-        setProducts(products.sort((a, b) => a.price - b.price));
+    const sortByPrice = isDesc => {
+        setProducts(products.sort((a, b) => (isDesc) ? b.price - a.price : a.price - b.price));
         setMatrixProducts( makeMatrixForProduct(products, 5) );
     }
     
