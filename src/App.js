@@ -10,6 +10,7 @@ import reducer from './reducer';
 function App() {
     const [products, setProducts] = useState([]);
     const [matrixProducts, setMatrixProducts] = useState([]);
+    const [favoriteCount, setFavoriteCount] = useState(null);
     
     const [favoriteProducts, dispatch] = useReducer(reducer, null);
     
@@ -70,11 +71,15 @@ function App() {
         const products = JSON.parse( localStorage.getItem('favorite') );
         
         dispatch({type: 'POPULATE', payload: products || []});
+        
+        setFavoriteCount(favoriteProducts.length);
     }, []);
     
     useEffect(() => {
-        if (favoriteProducts !== null)
+        if (favoriteProducts !== null) {
             localStorage.setItem('favorite', JSON.stringify(favoriteProducts));
+            setFavoriteCount(favoriteProducts.length);
+        }
     }, [favoriteProducts]);
     
     return (
@@ -82,6 +87,7 @@ function App() {
             <Header sortByPrice={sortByPrice}
                     sortByRate={sortByRate}
                     clearFilters={setFakeData}
+                    favoriteCount={favoriteCount}
             />
             
             { products && matrixProducts && matrixProducts.map((item) =>

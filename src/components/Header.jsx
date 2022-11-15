@@ -3,7 +3,7 @@ import {Button} from "react-bootstrap";
 import Sorting from "../elements/Sorting";
 import Favorite from "../elements/Favorite";
 
-const Header = ({sortByRate, sortByPrice, clearFilters}) => {
+const Header = ({favoriteCount, sortByRate, sortByPrice, clearFilters}) => {
   return (
     <div style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px'}}>
       <div style={{display: 'flex', alignItems: 'space-between', width: '70%', marginTop: '25px' }}>
@@ -15,7 +15,7 @@ const Header = ({sortByRate, sortByPrice, clearFilters}) => {
           My store
         </div>
         
-        <Favorite />
+        <Favorite count={favoriteCount}/>
         
         <div>
           <Sorting sortByPrice={sortByPrice} sortByRate={sortByRate}/>
