@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Card} from "react-bootstrap";
 import StarRatings from 'react-star-ratings';
-import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
+import {HiHeart, HiOutlineHeart} from "react-icons/hi";
+import {ImCart} from "react-icons/im";
 
 const CardItem = ({category, description, id, image, price, rating, title}) => {
     const [isLiked, setIsLiked] = useState(false);
@@ -47,9 +48,9 @@ const CardItem = ({category, description, id, image, price, rating, title}) => {
                 <Card.Text>
                     {price}$
                 </Card.Text>
-                <Button variant="success" style={{margin: '10px'}}>Buy</Button>
-                <Button variant="outline-danger" onClick={likeHandler}>
-                    {isLiked ? <AiFillHeart/> : <AiOutlineHeart/>}
+                <Button variant="success" style={{margin: '10px'}}><ImCart/></Button>
+                <Button variant="outline-danger" onClick={likeHandler} style={{}}>
+                    {isLiked ? <HiHeart/> : <HiOutlineHeart/>}
                 </Button>
             </Card.Body>
         </Card>
