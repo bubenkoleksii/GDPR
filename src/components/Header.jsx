@@ -15,7 +15,7 @@ const Header = ({sortByRate, sortByPrice, clearFilters}) => {
           My store
         </div>
         
-        <Favorite/>
+        <Favorite />
         
         <div>
           <Sorting sortByPrice={sortByPrice} sortByRate={sortByRate}/>

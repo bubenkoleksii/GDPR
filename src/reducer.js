@@ -3,9 +3,9 @@ export default function (state, action) {
     case 'POPULATE':
       return action.payload;
     case 'REMOVE':
-      return state.filter(team => team.id !== action.id);
+      return state.filter(team => team.id !== action.payload);
     case 'ADD':
-      return [...state, {id: action.id, name: action.name}];
+      return [...state, action.payload];
     default:
       return state;
   }

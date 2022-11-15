@@ -1,15 +1,25 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import axios from "axios";
 
 import './App.css';
 import {STORE_URL} from './consts';
 import CardRow from "./components/CardRow";
 import Header from "./components/Header";
-
+import reducer from './reducer';
 
 function App() {
     const [products, setProducts] = useState([]);
     const [matrixProducts, setMatrixProducts] = useState([]);
+    
+    const [favoriteProducts, dispatch] = useReducer(reducer, null);
+    
+    const addFavoriteProductHandler = product => {
+        dispatch({type: 'ADD', payload: product});
+    }
+    
+    const removeFavoriteProductHandler = id => {
+        dispatch({type: 'REMOVE', payload: id});
+    }
     
     const setFakeData = () => {
         const url = STORE_URL + 'products';
@@ -43,6 +53,10 @@ function App() {
         return mainArray;
     }
     
+    const checkIsFavorite = id => {
+        return favoriteProducts.map(f => f.id === id).includes(true);
+    }
+    
     useEffect(() => {
         setMatrixProducts( makeMatrixForProduct(products, 5) );
     }, [products]);
@@ -51,13 +65,31 @@ function App() {
     useEffect(() => {
         setFakeData();
     }, []);
-
-
+    
+    useEffect(() => {
+        const products = JSON.parse( localStorage.getItem('favorite') );
+        
+        dispatch({type: 'POPULATE', payload: products || []});
+    }, []);
+    
+    useEffect(() => {
+        if (favoriteProducts !== null)
+            localStorage.setItem('favorite', JSON.stringify(favoriteProducts));
+    }, [favoriteProducts]);
+    
     return (
         <div className="App">
-            <Header sortByPrice={sortByPrice} sortByRate={sortByRate} clearFilters={setFakeData}/>
+            <Header sortByPrice={sortByPrice}
+                    sortByRate={sortByRate}
+                    clearFilters={setFakeData}
+            />
+            
             { products && matrixProducts && matrixProducts.map((item) =>
-                <CardRow products={item}/>
+                <CardRow products={item}
+                         addFavorite={addFavoriteProductHandler}
+                         removeFavorite={removeFavoriteProductHandler}
+                         checkIsFavorite={checkIsFavorite}
+                />
             )}
         </div>
     );
