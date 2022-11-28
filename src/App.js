@@ -39,6 +39,32 @@ function App() {
         setProducts(products.sort((a, b) => b.rating.rate - a.rating.rate));
         setMatrixProducts( makeMatrixForProduct(products, COLUMNS) );
     }
+
+    const filterByCategory = (categories) => {
+        console.log(`selected categories: `, categories);
+        if (categories.length === 0) {
+            console.log('ABABA');
+            setFakeData();
+            return
+        }
+
+        const url = STORE_URL + 'products';
+        let allProducts = [];
+
+        axios.get(url).then(response => {
+            allProducts = response.data;
+
+            let filteredProducts = [];
+
+            allProducts.forEach((product) => {
+                if (categories.includes(product.category)) {
+                    filteredProducts.push(product)
+                }
+            });
+
+            setProducts(filteredProducts);
+        });
+    }
     
     const makeMatrixForProduct = (products, columns) => {
         const mainArray = [];
@@ -98,6 +124,7 @@ function App() {
                     clearFilters={setFakeData}
                     favoriteCount={favoriteCount}
                     onlyFavorite={setOnlyFavorite}
+                    filterByCategory={filterByCategory}
             />
             
             { products && matrixProducts && matrixProducts.map((item) =>
