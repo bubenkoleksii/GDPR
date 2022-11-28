@@ -6,6 +6,7 @@ import {STORE_URL, COLUMNS} from './consts';
 import CardRow from "./components/CardRow";
 import Header from "./components/Header";
 import reducer from './reducer';
+import Notification from "./components/Notification";
 
 function App() {
     const [products, setProducts] = useState([]);
@@ -41,9 +42,7 @@ function App() {
     }
 
     const filterByCategory = (categories) => {
-        console.log(`selected categories: `, categories);
         if (categories.length === 0) {
-            console.log('ABABA');
             setFakeData();
             return
         }
@@ -87,7 +86,6 @@ function App() {
     }
     
     const setOnlyFavorite = () => {
-        console.log(favoriteProducts[0], products[0]);
         setProducts(favoriteProducts);
         setMatrixProducts( makeMatrixForProduct(products, COLUMNS))
     }
@@ -134,6 +132,7 @@ function App() {
                          checkIsFavorite={checkIsFavorite}
                 />
             )}
+            <Notification/>
         </div>
     );
 }

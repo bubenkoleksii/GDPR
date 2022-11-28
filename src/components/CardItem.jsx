@@ -3,6 +3,7 @@ import {Button, Card} from "react-bootstrap";
 import StarRatings from 'react-star-ratings';
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {ImCart} from "react-icons/im";
+import {toast} from "react-toastify";
 
 const CardItem = ({category, description, id, image, price, rating, title, removeFavorite, addFavorite, checkIsFavorite}) => {
     const [isLiked, setIsLiked] = useState( checkIsFavorite(id) );
@@ -10,6 +11,10 @@ const CardItem = ({category, description, id, image, price, rating, title, remov
 
     const likeHandler = () => {
         isLiked ? removeFavorite(id) : addFavorite({category, description, id, image, price, rating, title});
+    
+        !isLiked ?
+          toast.success(`${title} added to favorites`)
+          : toast.error(`${title} deleted from favorites`);
         
         setIsLiked(!isLiked);
     }
