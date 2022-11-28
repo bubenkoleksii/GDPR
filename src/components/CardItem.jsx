@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Button, Card} from "react-bootstrap";
 import StarRatings from 'react-star-ratings';
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
@@ -19,7 +19,6 @@ const CardItem = ({category, description, id, image, price, rating, title, remov
     }
 
     const handleCartFocus = () => {
-        console.log(cartRef)
         cartRef.current.classList.toggle('button-focus');
     }
 
