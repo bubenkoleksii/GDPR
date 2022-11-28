@@ -24,39 +24,41 @@ const CardItem = ({category, description, id, image, price, rating, title, remov
 
 
     return (
-        <Card onClick={handleCartFocus} style={{width: '18rem', cursor: 'pointer'}}>
+        <Card style={{width: '18rem', cursor: 'pointer'}}>
             <div style={{
                 height: '150px',
                 width: '18rem',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
-            }}>
+                justifyContent: 'center',
+            }} onClick={handleCartFocus}>
                 <img src={image} style={{height: '130px', width: '110px'}} alt={'productImage'}/>
             </div>
             <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                    {category}
-                </Card.Text>
-                <Card.Text>
-                    <p style={{color: '#c9c5c9'}}>
-                        {replaceDescription(description)}
-                    </p>
-                </Card.Text>
-                <Card.Text>
-                    <StarRatings
-                        rating={rating.rate}
-                        starRatedColor="#f5c542"
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension="24px"
-                        starSpacing="2px"
-                    /> {rating.count} відгуків
-                </Card.Text>
-                <Card.Text>
-                    {price}$
-                </Card.Text>
+                <div onClick={handleCartFocus}>
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>
+                        {category}
+                    </Card.Text>
+                    <Card.Text>
+                        <p style={{color: '#c9c5c9'}}>
+                            {replaceDescription(description)}
+                        </p>
+                    </Card.Text>
+                    <Card.Text>
+                        <StarRatings
+                            rating={rating.rate}
+                            starRatedColor="#f5c542"
+                            numberOfStars={5}
+                            name='rating'
+                            starDimension="24px"
+                            starSpacing="2px"
+                        /> {rating.count} відгуків
+                    </Card.Text>
+                    <Card.Text>
+                        {price}$
+                    </Card.Text>
+                </div>
                 <Button variant="success" style={{margin: '10px'}} ref={cartRef}><ImCart/></Button>
                 <Button variant="outline-danger" onClick={likeHandler} style={{}}>
                     {isLiked ? <HiHeart/> : <HiOutlineHeart/>}
