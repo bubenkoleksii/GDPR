@@ -14,3 +14,7 @@ code {
     monospace;
 }
 
+.button-focus {
+  background-color: darkred;
+}
+
