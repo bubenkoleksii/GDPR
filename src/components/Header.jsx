@@ -14,7 +14,7 @@ const Header = ({favoriteCount, onlyFavorite, sortByRate, sortByPrice, clearFilt
                 </div>
 
                 <div style={{width: '100%', height: '50px', color: "red", fontSize: '20px'}}>
-                    My store
+                    <h1>My store</h1>
                 </div>
 
                 <Favorite count={favoriteCount} onlyFavorite={onlyFavorite}/>
