@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Button, Card} from "react-bootstrap";
 import StarRatings from 'react-star-ratings';
-import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
+import {HiHeart, HiOutlineHeart} from "react-icons/hi";
+import {ImCart} from "react-icons/im";
 
 const CardItem = ({category, description, id, image, price, rating, title, removeFavorite, addFavorite, checkIsFavorite}) => {
     const [isLiked, setIsLiked] = useState( checkIsFavorite(id) );
-    
+    const cartRef = useRef();
+
     const likeHandler = () => {
         isLiked ? removeFavorite(id) : addFavorite({category, description, id, image, price, rating, title});
         
@@ -16,8 +18,14 @@ const CardItem = ({category, description, id, image, price, rating, title, remov
         return description.substr(0, 50) + '...'
     }
 
+    const handleCartFocus = () => {
+        console.log(cartRef)
+        cartRef.current.classList.toggle('button-focus');
+    }
+
+
     return (
-        <Card style={{width: '18rem'}}>
+        <Card onClick={handleCartFocus} style={{width: '18rem', cursor: 'pointer'}}>
             <div style={{
                 height: '150px',
                 width: '18rem',
@@ -50,9 +58,9 @@ const CardItem = ({category, description, id, image, price, rating, title, remov
                 <Card.Text>
                     {price}$
                 </Card.Text>
-                <Button variant="success" style={{margin: '10px'}}>Buy</Button>
-                <Button variant="outline-danger" onClick={likeHandler}>
-                    {isLiked ? <AiFillHeart/> : <AiOutlineHeart/>}
+                <Button variant="success" style={{margin: '10px'}} ref={cartRef}><ImCart/></Button>
+                <Button variant="outline-danger" onClick={likeHandler} style={{}}>
+                    {isLiked ? <HiHeart/> : <HiOutlineHeart/>}
                 </Button>
             </Card.Body>
         </Card>
