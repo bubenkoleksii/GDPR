@@ -19,3 +19,49 @@ code {
   background-color: darkred;
 }
 
+.ml-10 {
+  margin-left: 10px;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+input[type="checkbox"]:checked:before {
+  content: '\2714';
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 1px;
+  font-size: 14px;
+  color: #fff;
+}
+
+input[type="checkbox"]:focus {
+  border: 1px solid #4d90fe;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #4d90fe;
+  border: 1px solid #4d90fe;
+  color: #fff;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}

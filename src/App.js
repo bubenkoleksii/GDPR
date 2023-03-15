@@ -7,6 +7,7 @@ import CardRow from "./components/CardRow";
 import Header from "./components/Header";
 import reducer from './reducer';
 import Notification from "./components/Notification";
+import Popup from "./components/Popup";
 
 function App() {
     const [products, setProducts] = useState([]);
@@ -133,6 +134,8 @@ function App() {
                 />
             )}
             <Notification/>
+            
+            <Popup/>
         </div>
     );
 }
